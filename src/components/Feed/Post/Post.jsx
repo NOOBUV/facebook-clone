@@ -7,7 +7,17 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import NearMeIcon from "@material-ui/icons/NearMe";
 import { ExpandMoreOutlined } from "@material-ui/icons";
 
+import { useState } from "react";
+
 function Post({ profilePic, image, username, timestamp, message }) {
+  const [isLiked, setLiked] = useState(false);
+
+  const handleLike = () => {
+    setLiked((prevState) => !prevState);
+  };
+
+  const liked = isLiked ? "liked" : "";
+
   return (
     <div className="post">
       <div className="post__top">
@@ -25,7 +35,7 @@ function Post({ profilePic, image, username, timestamp, message }) {
       </div>
 
       <div className="post__options">
-        <div className="post__option">
+        <div className={`post__option ${liked}`} onClick={handleLike}>
           <ThumbUpIcon />
           <p>Like</p>
         </div>
